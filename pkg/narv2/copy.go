@@ -1,4 +1,4 @@
-package nar
+package narv2
 
 import "io"
 
@@ -39,7 +39,9 @@ func copyNAR(dst Writer, src Reader, tag Tag) error {
 			if err := dst.Entry(src.Name()); err != nil {
 				return err
 			}
-			copyNAR(dst, src, tag)
+			if err := copyNAR(dst, src, tag); err != nil {
+				return err
+			}
 		}
 	}
 }

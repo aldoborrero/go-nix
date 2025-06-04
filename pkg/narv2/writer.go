@@ -1,37 +1,8 @@
-package nar
+package narv2
 
 import (
-	"bytes"
-	"encoding/binary"
 	"fmt"
 	"io"
-)
-
-var encoding = binary.LittleEndian
-var zero [8]byte
-
-func token(parts ...string) []byte {
-	var buf bytes.Buffer
-	for _, part := range parts {
-		binary.Write(&buf, encoding, uint64(len(part)))
-		buf.WriteString(part)
-		n := len(part) & 7
-		if n != 0 {
-			buf.Write(zero[n:])
-		}
-	}
-	return buf.Bytes()
-}
-
-var (
-	tokNar = token("nix-archive-1", "(", "type")
-	tokReg = token("regular", "contents")
-	tokExe = token("regular", "executable", "", "contents")
-	tokSym = token("symlink", "target")
-	tokDir = token("directory")
-	tokEnt = token("entry", "(", "name")
-	tokNod = token("node", "(", "type")
-	tokPar = token(")")
 )
 
 type Writer interface {
