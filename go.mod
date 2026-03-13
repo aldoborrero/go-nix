@@ -1,6 +1,6 @@
 module github.com/nix-community/go-nix
 
-go 1.20
+go 1.22
 
 require (
 	github.com/adrg/xdg v0.5.0
