@@ -2,12 +2,11 @@ package nixbase32_test
 
 import (
 	"bytes"
-	"math/rand"
+	"crypto/rand"
 	"strconv"
 	"strings"
 	"testing"
 
-	//nolint:revive
 	. "github.com/nix-community/go-nix/pkg/nixbase32"
 	"github.com/stretchr/testify/assert"
 )
@@ -146,7 +145,7 @@ func BenchmarkEncode(b *testing.B) {
 	for _, s := range sizes {
 		bytes := make([]byte, s)
 
-		rand.Read(bytes) //nolint:gosec,staticcheck
+		rand.Read(bytes)
 
 		buf := make([]byte, EncodedLen(s))
 
@@ -166,7 +165,7 @@ func BenchmarkEncodeToString(b *testing.B) {
 
 	for _, s := range sizes {
 		bytes := make([]byte, s)
-		rand.Read(bytes) //nolint:gosec,staticcheck
+		rand.Read(bytes)
 
 		b.Run(strconv.Itoa(s), func(b *testing.B) {
 			b.ReportAllocs()
@@ -185,7 +184,7 @@ func BenchmarkDecode(b *testing.B) {
 	for _, s := range sizes {
 		bytes := make([]byte, s)
 
-		rand.Read(bytes) //nolint:gosec,staticcheck
+		rand.Read(bytes)
 
 		input := make([]byte, EncodedLen(s))
 		Encode(input, bytes)
@@ -208,7 +207,7 @@ func BenchmarkDecodeString(b *testing.B) {
 
 	for _, s := range sizes {
 		bytes := make([]byte, s)
-		rand.Read(bytes) //nolint:gosec,staticcheck
+		rand.Read(bytes)
 		input := EncodeToString(bytes)
 
 		b.Run(strconv.Itoa(s), func(b *testing.B) {
@@ -230,7 +229,7 @@ func BenchmarkValidateString(b *testing.B) {
 
 	for _, s := range sizes {
 		bytes := make([]byte, s)
-		rand.Read(bytes) //nolint:gosec,staticcheck
+		rand.Read(bytes)
 		input := EncodeToString(bytes)
 
 		b.Run(strconv.Itoa(s), func(b *testing.B) {
